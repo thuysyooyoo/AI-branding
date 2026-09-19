@@ -1,0 +1,20 @@
+# Virtual environments
+.venv/
+.venv_seo/
+.uv_cache/
+.uv_python/
+__pycache__/
+*.pyc
+
+# Browser profiles & sensitive sessions (Bảo mật tài khoản Facebook)
+fb_profile/
+.playwright-mcp/
+
+# Temporary & Log files
+logs/
+scratch/
+*.tmp
+*.tmp.xlsx
+
+# Agent internal cache
+.agent/

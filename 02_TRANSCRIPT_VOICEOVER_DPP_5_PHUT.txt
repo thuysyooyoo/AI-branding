@@ -1,0 +1,90 @@
+[00:00–00:10]
+Hãy tưởng tượng: một container hàng Việt Nam vừa cập cảng châu Âu. Hàng đủ, chứng từ có, nhưng hệ thống vẫn bật cảnh báo vì một định danh sản phẩm không khớp.
+
+[00:10–00:20]
+Trong vài năm tới, tình huống như vậy có thể trở nên quen thuộc. EU đang chuyển từ kiểm tra giấy tờ rời rạc sang kiểm tra dữ liệu có cấu trúc và xác minh được.
+
+[00:20–00:30]
+Tâm điểm của thay đổi này là DPP, hay Hộ chiếu kỹ thuật số cho sản phẩm. Nhưng DPP thực sự là gì, và doanh nghiệp Việt Nam phải chuẩn bị ra sao?
+
+[00:30–00:40]
+Có thể hình dung DPP như một hồ sơ số đi cùng sản phẩm suốt vòng đời. Nó được liên kết bằng một định danh duy nhất và một vật mang dữ liệu.
+
+[00:40–00:50]
+Vật mang dữ liệu có thể là mã hai chiều hoặc công nghệ nhận dạng khác. Nhưng DPP không chỉ là một mã QR, càng không phải một file PDF để đối phó.
+
+[00:50–01:00]
+Phía sau mã là dữ liệu có cấu trúc, máy có thể đọc và các bên được phân quyền có thể truy cập: người mua, nhà nhập khẩu, cơ quan quản lý hoặc đơn vị tái chế.
+
+[01:00–01:10]
+Tùy từng nhóm hàng, dữ liệu có thể liên quan đến thành phần vật liệu, độ bền, khả năng sửa chữa, tỷ lệ tái chế, hướng dẫn xử lý và thông tin môi trường.
+
+[01:10–01:20]
+Một điểm cần nói rõ: không phải mọi DPP đều có cùng bộ trường carbon hay lao động. Nội dung bắt buộc sẽ do quy định riêng của từng nhóm sản phẩm quyết định.
+
+[01:20–01:30]
+Quy trình bắt đầu từ chuỗi cung ứng. Nhà sản xuất và đơn vị đưa hàng vào thị trường EU phải tập hợp dữ liệu từ nguyên liệu, nhà máy, kiểm nghiệm đến sản phẩm hoàn thiện.
+
+[01:30–01:40]
+Tiếp theo, họ tạo DPP và đăng ký các định danh cùng siêu dữ liệu cần thiết vào EU DPP Registry. Dữ liệu chi tiết vẫn được lưu theo mô hình phi tập trung.
+
+[01:40–01:50]
+Registry đã đi vào hoạt động ngày 20 tháng 7 năm 2026. Hệ thống cấp một mã đăng ký duy nhất, đóng vai trò kết nối sản phẩm với hồ sơ đã đăng ký.
+
+[01:50–02:00]
+Đối với sản phẩm thuộc diện áp dụng, hải quan có thể kiểm tra điện tử định danh đăng ký và mã hàng trước khi cho lưu thông tự do trong thị trường EU.
+
+[02:00–02:10]
+Cơ quan giám sát thị trường có thể truy cập sâu hơn theo quyền hạn. Tuy nhiên, có DPP không đồng nghĩa sản phẩm tự động đạt mọi yêu cầu an toàn, nhãn mác hay hải quan khác.
+
+[02:10–02:20]
+Mốc gần nhất là ngày 18 tháng 2 năm 2027: hộ chiếu pin sẽ bắt buộc với pin xe điện, pin phương tiện nhẹ và pin công nghiệp trên hai kilowatt giờ.
+
+[02:20–02:30]
+Trong kế hoạch ưu tiên, sắt thép bắt đầu từ 2026; các sản phẩm liên quan năng lượng được xử lý dần trong giai đoạn 2026 đến 2029.
+
+[02:30–02:40]
+Với dệt may, văn bản chuyên ngành dự kiến được thông qua vào quý bốn năm 2027. Sau đó còn có hướng dẫn kỹ thuật và thời gian chuyển tiếp để doanh nghiệp triển khai.
+
+[02:40–02:50]
+Đồ nội thất dự kiến đến lượt vào 2028, còn sản phẩm công nghệ thông tin và truyền thông vào 2029. Đây là lịch chỉ dẫn và vẫn có thể thay đổi.
+
+[02:50–03:00]
+Vì vậy, năm 2026 không phải lúc hoảng sợ vì mọi lô hàng sẽ bị chặn. Đây là thời điểm tốt nhất để thử nghiệm khi yêu cầu chưa phủ đồng loạt.
+
+[03:00–03:10]
+Việc đầu tiên là xác định chính xác sản phẩm, mã HS, thị trường đích và quy định áp dụng. Đừng chuẩn bị DPP theo tin đồn hoặc theo một mẫu chung trên mạng.
+
+[03:10–03:20]
+Việc thứ hai là vẽ bản đồ chuỗi cung ứng. Mỗi nguyên liệu đến từ đâu, qua nhà máy nào, thuộc lô nào và ai chịu trách nhiệm xác nhận dữ liệu?
+
+[03:20–03:30]
+Việc thứ ba là chuẩn hóa bộ hồ sơ nền: định mức nguyên liệu, chứng nhận vật liệu, phiếu kiểm nghiệm, hóa đơn, dữ liệu nhà máy và bằng chứng về nguồn gốc.
+
+[03:30–03:40]
+Lưu ý, DPP không thay thế C/O, tờ khai hoặc chứng nhận chuyên ngành. Giá trị của nó nằm ở việc liên kết các dữ liệu và giữ chúng nhất quán.
+
+[03:40–03:50]
+Việc thứ tư là chỉ định người sở hữu dữ liệu. Mỗi trường thông tin cần có nguồn, ngày cập nhật, phiên bản, người duyệt và một bản sao dự phòng.
+
+[03:50–04:00]
+Nếu mua nguyên liệu từ Trung Quốc, Hàn Quốc hay bất kỳ thị trường nào, hãy đưa nghĩa vụ cung cấp dữ liệu vào hợp đồng, kèm thời hạn và quyền kiểm tra.
+
+[04:00–04:10]
+Với dữ liệu môi trường, đừng tự ước lượng cho đẹp. Hãy thống nhất phương pháp đo, phạm vi nhà máy, đơn vị tính và bằng chứng để kết quả có thể kiểm tra lại.
+
+[04:10–04:20]
+Sau đó, chọn một SKU để chạy thử: tạo định danh, trang dữ liệu, mã hai chiều và phân quyền truy cập. Đừng bắt đầu bằng toàn bộ danh mục sản phẩm.
+
+[04:20–04:30]
+Hãy diễn tập ba tình huống: sai mã hàng, thiếu dữ liệu nhà cung cấp và thông tin giữa DPP với chứng từ không khớp. Cách xử lý phải được viết thành quy trình.
+
+[04:30–04:40]
+Ví dụ với một chiếc áo, doanh nghiệp cần nối được sợi, dệt, nhuộm, cắt may và lô thành phẩm thành một dòng dữ liệu xuyên suốt, không đứt đoạn.
+
+[04:40–04:50]
+Lợi ích không chỉ là thông quan. Dữ liệu sạch giúp trả lời khách hàng nhanh hơn, khoanh vùng thu hồi chính xác hơn và giảm nguy cơ dòng tiền mắc kẹt.
+
+[04:50–05:00]
+DPP cho thấy thương mại đang chuyển từ “có giấy tờ” sang “dữ liệu xác minh được”. Doanh nghiệp bạn đang xuất nhóm hàng nào? Hãy chia sẻ để cùng lập checklist phù hợp.
+
