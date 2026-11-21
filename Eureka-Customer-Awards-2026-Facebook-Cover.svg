@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1640" height="624" viewBox="0 0 1640 624" role="img" aria-labelledby="title desc">
+  <title id="title">Eureka Customer Awards 2026</title>
+  <desc id="desc">Ảnh bìa Facebook tông cam cháy, chiếc cúp ánh kim và ba giải thưởng khách hàng.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F47724"/>
+      <stop offset=".48" stop-color="#C64A1B"/>
+      <stop offset="1" stop-color="#852B1A"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="72%" cy="40%" r="58%">
+      <stop offset="0" stop-color="#FFB84A" stop-opacity=".74"/>
+      <stop offset=".52" stop-color="#F5832A" stop-opacity=".2"/>
+      <stop offset="1" stop-color="#7D2418" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFF4C7"/>
+      <stop offset=".22" stop-color="#F4C85E"/>
+      <stop offset=".48" stop-color="#FFF0B0"/>
+      <stop offset=".68" stop-color="#C98527"/>
+      <stop offset=".88" stop-color="#FFE697"/>
+      <stop offset="1" stop-color="#B96D1D"/>
+    </linearGradient>
+    <linearGradient id="goldSide" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#B86A20"/>
+      <stop offset=".35" stop-color="#FFE99B"/>
+      <stop offset=".62" stop-color="#D99B38"/>
+      <stop offset="1" stop-color="#FFF0B5"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#702519" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#421915" stop-opacity=".94"/>
+    </linearGradient>
+    <linearGradient id="ribbon" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FFF2BD"/>
+      <stop offset=".45" stop-color="#D89931"/>
+      <stop offset=".72" stop-color="#FFF0A7"/>
+      <stop offset="1" stop-color="#B56C22"/>
+    </linearGradient>
+    <filter id="softShadow" x="-30%" y="-30%" width="160%" height="180%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="12" result="blur"/>
+      <feOffset dy="12" result="offset"/>
+      <feComponentTransfer><feFuncA type="linear" slope=".38"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowText" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <pattern id="grain" width="90" height="90" patternUnits="userSpaceOnUse">
+      <circle cx="8" cy="12" r="1.2" fill="#FFE7B4" opacity=".16"/>
+      <circle cx="63" cy="31" r=".9" fill="#FFE7B4" opacity=".13"/>
+      <circle cx="39" cy="76" r="1.1" fill="#5C1E17" opacity=".14"/>
+      <circle cx="84" cy="82" r=".8" fill="#FFE7B4" opacity=".16"/>
+    </pattern>
+  </defs>
+
+  <!-- Burnt-orange field with a soft celebratory halo -->
+  <rect width="1640" height="624" fill="url(#bg)"/>
+  <rect width="1640" height="624" fill="url(#glow)"/>
+  <rect width="1640" height="624" fill="url(#grain)" opacity=".62"/>
+  <path d="M0 402 C260 325 464 425 720 360 S1215 285 1640 370 V624 H0Z" fill="#792619" opacity=".12"/>
+  <path d="M0 414 C288 338 522 441 768 373 S1280 312 1640 386" fill="none" stroke="#FFD17A" stroke-width="2" opacity=".2"/>
+  <circle cx="1262" cy="246" r="250" fill="none" stroke="#FFD989" stroke-width="1.5" opacity=".16"/>
+  <circle cx="1262" cy="246" r="290" fill="none" stroke="#FFE9B0" stroke-width="1" opacity=".1"/>
+
+  <!-- Fine sparkles -->
+  <g fill="#FFF0BD" filter="url(#glowText)" opacity=".92">
+    <path d="M1010 78 l4 12 12 4-12 4-4 12-4-12-12-4 12-4z"/>
+    <path d="M1501 93 l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/>
+    <path d="M969 300 l3 8 8 3-8 3-3 8-3-8-8-3 8-3z"/>
+    <circle cx="1438" cy="306" r="3"/>
+    <circle cx="1056" cy="184" r="2.2"/>
+  </g>
+  <g fill="#FFE8A8" opacity=".58">
+    <circle cx="1007" cy="222" r="2"/><circle cx="1067" cy="113" r="1.5"/>
+    <circle cx="1512" cy="245" r="1.8"/><circle cx="1428" cy="122" r="1.6"/>
+    <circle cx="966" cy="354" r="1.4"/><circle cx="1560" cy="326" r="1.5"/>
+  </g>
+
+  <!-- Event title -->
+  <g font-family="Arial, 'Segoe UI', sans-serif" font-weight="700">
+    <text x="76" y="104" fill="#FFF6DF" font-size="39" letter-spacing="5">EUREKA</text>
+    <path d="M77 121 H250" stroke="#F6D478" stroke-width="2.5" opacity=".9"/>
+    <text x="74" y="190" fill="#FFF8E6" font-size="62" letter-spacing="1.4">CUSTOMER AWARDS</text>
+    <text x="75" y="267" fill="url(#gold)" font-size="66" letter-spacing="4">2026</text>
+  </g>
+  <g>
+    <rect x="75" y="294" width="441" height="48" rx="24" fill="#762519" fill-opacity=".45" stroke="#F8D16F" stroke-width="1.7"/>
+    <rect x="81" y="300" width="429" height="36" rx="18" fill="none" stroke="#FFE7A0" stroke-opacity=".45"/>
+    <text x="295" y="325" text-anchor="middle" font-family="Arial, 'Segoe UI', sans-serif" font-size="19" font-weight="600" fill="#FFF8E8">Thời gian: 01/10/2026 - 31/12/2026</text>
+  </g>
+
+  <!-- Original trophy-inspired sculpture: angular gold cup, looping ribbon and stepped base -->
+  <g filter="url(#softShadow)">
+    <!-- rear stem and sculptural supports -->
+    <path d="M1190 242 L1140 400 L1190 400 L1240 249Z" fill="url(#goldSide)"/>
+    <path d="M1278 240 L1337 399 L1382 399 L1325 221Z" fill="url(#gold)"/>
+    <path d="M1216 251 L1221 389 L1266 389 L1281 248Z" fill="#F5D57C" opacity=".82"/>
+    <!-- asymmetric cup silhouette -->
+    <path d="M1121 86 Q1129 69 1146 82 L1321 200 Q1338 212 1327 229 L1261 296 Q1249 308 1236 294 L1113 124 Q1104 109 1121 86Z" fill="url(#gold)" stroke="#FFF0B4" stroke-width="2.4"/>
+    <path d="M1138 95 L1299 204 L1262 240 L1123 114Z" fill="#FFF1B3" opacity=".78"/>
+    <path d="M1123 123 L1237 286 L1254 269 L1154 102Z" fill="#B86B20" opacity=".58"/>
+    <path d="M1167 111 L1295 203 L1275 222 L1150 126Z" fill="#FFF9DA" opacity=".54"/>
+    <!-- orbiting ribbon around the trophy -->
+    <path d="M1096 256 C1164 205 1352 204 1413 252 C1452 282 1391 303 1322 287 C1234 266 1122 271 1073 319 C1031 360 1105 385 1197 350 C1297 312 1391 316 1419 348" fill="none" stroke="#8A4B20" stroke-width="13" stroke-linecap="round" opacity=".72"/>
+    <path d="M1096 249 C1164 198 1352 197 1413 245 C1452 275 1391 296 1322 280 C1234 259 1122 264 1073 312 C1031 353 1105 378 1197 343 C1297 305 1391 309 1419 341" fill="none" stroke="url(#ribbon)" stroke-width="8" stroke-linecap="round"/>
+    <path d="M1100 247 C1165 205 1350 202 1407 246" fill="none" stroke="#FFF9D9" stroke-width="1.8" opacity=".9"/>
+    <!-- base -->
+    <path d="M1168 382 H1341 L1374 412 H1135Z" fill="url(#goldSide)" stroke="#FFE9A0" stroke-width="2"/>
+    <path d="M1146 412 H1363 L1394 437 H1115Z" fill="url(#gold)" stroke="#FCE5A0" stroke-width="2"/>
+    <path d="M1114 436 H1394 L1421 454 H1087Z" fill="#AD641F" stroke="#F8D273" stroke-width="2"/>
+    <path d="M1141 416 H1368" stroke="#FFF7D4" stroke-width="2" opacity=".85"/>
+    <path d="M1110 440 H1398" stroke="#FFF2B9" stroke-width="1.4" opacity=".82"/>
+  </g>
+
+  <!-- Three award tiers and values from the supplied 2026 brief -->
+  <g font-family="Arial, 'Segoe UI', sans-serif">
+    <g>
+      <rect x="74" y="459" width="478" height="132" rx="17" fill="url(#card)" stroke="#F5CC69" stroke-width="2"/>
+      <rect x="80" y="465" width="466" height="120" rx="13" fill="none" stroke="#FFF0B5" stroke-opacity=".48"/>
+      <circle cx="119" cy="500" r="25" fill="url(#gold)" stroke="#FFF2BD" stroke-width="1.6"/>
+      <text x="119" y="509" text-anchor="middle" font-size="27" font-weight="700" fill="#6F281B">1</text>
+      <text x="158" y="507" font-size="30" font-weight="700" fill="#FFF6DD">35.000.000đ</text>
+      <path d="M101 523 H525" stroke="#E4B65C" stroke-opacity=".6"/>
+      <text x="101" y="554" font-size="19" font-weight="600" fill="#FFF9EE">Máy tính xách tay Surface Pro 11</text>
+    </g>
+    <g>
+      <rect x="581" y="459" width="478" height="132" rx="17" fill="url(#card)" stroke="#EBC15E" stroke-width="2"/>
+      <rect x="587" y="465" width="466" height="120" rx="13" fill="none" stroke="#FFF0B5" stroke-opacity=".42"/>
+      <circle cx="626" cy="500" r="25" fill="url(#gold)" stroke="#FFF2BD" stroke-width="1.6"/>
+      <text x="626" y="509" text-anchor="middle" font-size="27" font-weight="700" fill="#6F281B">2</text>
+      <text x="665" y="507" font-size="30" font-weight="700" fill="#FFF6DD">20.000.000đ</text>
+      <path d="M608 523 H1032" stroke="#E4B65C" stroke-opacity=".6"/>
+      <text x="608" y="554" font-size="19" font-weight="600" fill="#FFF9EE">iPad Air 11inch M3 5G 128GB</text>
+    </g>
+    <g>
+      <rect x="1088" y="459" width="478" height="132" rx="17" fill="url(#card)" stroke="#EBC15E" stroke-width="2"/>
+      <rect x="1094" y="465" width="466" height="120" rx="13" fill="none" stroke="#FFF0B5" stroke-opacity=".42"/>
+      <circle cx="1133" cy="500" r="25" fill="url(#gold)" stroke="#FFF2BD" stroke-width="1.6"/>
+      <text x="1133" y="509" text-anchor="middle" font-size="27" font-weight="700" fill="#6F281B">3</text>
+      <text x="1172" y="507" font-size="30" font-weight="700" fill="#FFF6DD">10.000.000đ</text>
+      <path d="M1115 523 H1539" stroke="#E4B65C" stroke-opacity=".6"/>
+      <text x="1115" y="554" font-size="19" font-weight="600" fill="#FFF9EE">Máy lọc không khí Dyson</text>
+    </g>
+  </g>
+  <path d="M77 608 H1563" stroke="#F7D483" stroke-width="1" opacity=".35"/>
+</svg>

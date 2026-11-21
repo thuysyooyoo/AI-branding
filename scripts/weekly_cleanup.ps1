@@ -28,7 +28,8 @@ function Clear-Folder($path, $label) {
     $before = Get-FolderSize $path
     Get-ChildItem $path -Force -ErrorAction SilentlyContinue |
         Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
-    $freed = $before - (Get-FolderSize $path)
+    $after = Get-FolderSize $path
+    $freed = [math]::Max(0, ($before - $after))
     Log "  OK [$label]: Giai phong $([math]::Round($freed/1MB,1)) MB"
     return $freed
 }
@@ -79,8 +80,117 @@ $oldFiles = Get-ChildItem $downloadsPath -File -ErrorAction SilentlyContinue |
                    $_.Extension -in @('.exe','.msi','.msp','.msix','.appx','.zip') }
 $oldSize  = ($oldFiles | Measure-Object Length -Sum).Sum
 $oldFiles | Remove-Item -Force -ErrorAction SilentlyContinue
-Log "  OK: Xoa $($oldFiles.Count) file ($([math]::Round($oldSize/1MB,1)) MB)"
+Log "  OK: Xoa $($oldFiles.Count) file cai dat cu ($([math]::Round($oldSize/1MB,1)) MB)"
 $totalFreed += $oldSize
+
+# ----------------------------------------------------------------
+# [4.2] Xoa ban cu cua file trung lap / phien ban (V1, V2...) trong Downloads
+#       Quy tac: GIU BAN CUOI CUNG (Moi nhat / Version cao nhat), XOA CAC BAN CU
+# ----------------------------------------------------------------
+Log ""
+Log "[4.2] DON BAN CU FILE TRUNG LAP / PHIEN BAN (V1, V2...) TRONG DOWNLOADS..."
+$genericNames = @('document', 'download', 'file', 'image', 'untitled', 'data', 'screenshot', 'img', 'scan', 'new', 'test', 'temp')
+$allFiles = Get-ChildItem -LiteralPath $downloadsPath -File -ErrorAction SilentlyContinue
+
+$dupGroups = @{}
+
+foreach ($f in $allFiles) {
+    $baseName = $f.BaseName
+    $ext = $f.Extension
+    
+    # 1. Clean browser duplicate patterns: ' (1)', ' (2)', ' - Copy', etc.
+    $cleaned = $baseName -replace '\s*\(\d+\)$', ''
+    $cleaned = $cleaned -replace '\s*-\s*Copy(\s*\(\d+\))?$', ''
+    
+    # 2. Clean version patterns: '_v1', '_v2', '-v3', ' v4', ' V1.2', etc. at the end
+    $cleaned = $cleaned -replace '(?i)[_ -]v\d+(\.\d+)?$', ''
+    
+    $cleanKey = $cleaned.Trim().ToLower()
+    $key = $cleanKey + $ext.ToLower()
+    $isGeneric = $genericNames -contains $cleanKey
+    
+    if (-not $dupGroups.ContainsKey($key)) {
+        $dupGroups[$key] = [PSCustomObject]@{
+            Key = $key
+            BaseName = $cleaned.Trim()
+            Extension = $ext
+            IsGeneric = $isGeneric
+            Files = [System.Collections.Generic.List[System.IO.FileInfo]]::new()
+        }
+    }
+    $dupGroups[$key].Files.Add($f)
+}
+
+$candidates = $dupGroups.Values | Where-Object { $_.Files.Count -gt 1 }
+$verDeletedCount = 0
+$verFreedBytes = 0
+
+foreach ($group in $candidates) {
+    if ($group.IsGeneric) {
+        # Chi xoa file ten chung chung neu cung dung luong va trung ma SHA-256 (tranh xoa nham chung tu khac nhau)
+        $sizeGroups = $group.Files | Group-Object Length | Where-Object { $_.Count -gt 1 }
+        foreach ($sg in $sizeGroups) {
+            $hashes = @{}
+            foreach ($file in $sg.Group) {
+                $h = (Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash
+                if (-not $hashes.ContainsKey($h)) { $hashes[$h] = [System.Collections.Generic.List[System.IO.FileInfo]]::new() }
+                $hashes[$h].Add($file)
+            }
+            foreach ($hEntry in $hashes.GetEnumerator()) {
+                if ($hEntry.Value.Count -gt 1) {
+                    $sorted = $hEntry.Value | Sort-Object -Property LastWriteTime -Descending
+                    $keep = $sorted[0]
+                    for ($i = 1; $i -lt $sorted.Count; $i++) {
+                        $del = $sorted[$i]
+                        $sz = $del.Length
+                        Remove-Item -LiteralPath $del.FullName -Force -ErrorAction SilentlyContinue
+                        $verFreedBytes += $sz
+                        $verDeletedCount++
+                        Log "  Xoa ban cu (trung noi dung): $($del.Name) -> Giu ban: $($keep.Name)"
+                    }
+                }
+            }
+        }
+    } else {
+        # File co ten ro rang: Uu tien Version cao nhat, neu khong co version thi lay LastWriteTime moi nhat
+        $fileInfos = @()
+        $hasExplicitVer = $false
+        
+        foreach ($file in $group.Files) {
+            $ver = 0
+            if ($file.BaseName -match '(?i)[_ -]v(\d+(?:\.\d+)?)') {
+                $ver = [double]$Matches[1]
+                $hasExplicitVer = $true
+            }
+            $fileInfos += [PSCustomObject]@{
+                FileInfo = $file
+                Version = $ver
+                LastWriteTime = $file.LastWriteTime
+                Length = $file.Length
+            }
+        }
+        
+        if ($hasExplicitVer) {
+            $sorted = $fileInfos | Sort-Object -Property @{Expression="Version"; Descending=$true}, @{Expression="LastWriteTime"; Descending=$true}
+        } else {
+            $sorted = $fileInfos | Sort-Object -Property LastWriteTime -Descending
+        }
+        
+        $keepItem = $sorted[0]
+        for ($i = 1; $i -lt $sorted.Count; $i++) {
+            $delItem = $sorted[$i]
+            $sz = $delItem.FileInfo.Length
+            Remove-Item -LiteralPath $delItem.FileInfo.FullName -Force -ErrorAction SilentlyContinue
+            $verFreedBytes += $sz
+            $verDeletedCount++
+            Log "  Xoa ban cu: $($delItem.FileInfo.Name) -> Giu ban cuoi: $($keepItem.FileInfo.Name)"
+        }
+    }
+}
+
+Log "  OK: Da xoa $verDeletedCount ban cu/trung lap ($([math]::Round($verFreedBytes/1MB,1)) MB)"
+$totalFreed += $verFreedBytes
+
 
 # ----------------------------------------------------------------
 # [5] Browser Cache

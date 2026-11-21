@@ -47,25 +47,40 @@ def login_facebook():
         print("\n" + "=" * 65)
         print("HUONG DAN DANG NHAP:")
         print("1. Trinh duyet Chromium da mo len tren man hinh.")
-        print("2. Hay dang nhap tai khoan Facebook cua ban (mat khau, 2FA neu co).")
-        print("3. Sau khi da vao duoc trang chu Bang tin Facebook thanh cong:")
-        print("   -> Quay lai cua so den (CMD) nay va bam phim ENTER.")
+        print("2. Chi Thuy vui long dang nhap tai khoan Facebook (nhap mat khau / 2FA).")
+        print("3. He thong TU DONG THEO DOI va se tu dong luu phien ngay khi vao duoc Facebook!")
+        print("   (Hoac co the quay lai cua so nay bam ENTER bat ky luc nao).")
         print("=" * 65 + "\n")
         
-        try:
-            input("--> Sau khi dang nhap xong, hay bam ENTER tai day de luu phien: ")
-        except Exception:
-            print("[*] Dang theo doi tien trinh dang nhap...")
-            for _ in range(150):
-                time.sleep(2)
-                try:
-                    cookies = [c['name'] for c in context.cookies()]
-                    if 'c_user' in cookies:
-                        print("[✓] Da phat hien dang nhap thanh cong!")
-                        time.sleep(3)
-                        break
-                except Exception:
+        import msvcrt
+        print("[*] Dang cho Chi Thuy dang nhap tren trinh duyet...")
+        max_wait_seconds = 600
+        start_time = time.time()
+        logged_in = False
+
+        while time.time() - start_time < max_wait_seconds:
+            # Kiem tra neu nguoi dung bam phim ENTER hoac phim bat ky
+            if msvcrt.kbhit():
+                key = msvcrt.getch()
+                print("\n[✓] Nguoi dung da xac nhan hoan tat tren ban phim!")
+                logged_in = True
+                break
+
+            # Tu dong quet cookie c_user
+            try:
+                cookies = [c['name'] for c in context.cookies()]
+                if 'c_user' in cookies:
+                    print("\n[✓] XAC NHAN: DA PHAT HIEN DANG NHAP THANH CONG (cookie c_user)!")
+                    logged_in = True
+                    time.sleep(2)
                     break
+            except Exception:
+                pass
+
+            time.sleep(1.5)
+
+        if not logged_in:
+            print("[!] Het thoi gian cho dang nhap (10 phut).")
                     
         print("\n[*] Dang luu phien dang nhap va dong trinh duyet an toan...")
         time.sleep(2)

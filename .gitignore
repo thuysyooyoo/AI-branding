@@ -6,8 +6,9 @@
 __pycache__/
 *.pyc
 
-# Browser profiles & sensitive sessions (Bảo mật tài khoản Facebook)
+# Browser profiles & sensitive sessions (Bảo mật tài khoản Facebook / YouTube)
 fb_profile/
+yt_profile/
 .playwright-mcp/
 
 # Temporary & Log files
@@ -18,3 +19,6 @@ scratch/
 
 # Agent internal cache
 .agent/
+
+# Independent Web Platform Repositories
+website_thuystalk/

@@ -17,6 +17,8 @@ import time
 import datetime
 import re
 import json
+import hashlib
+from urllib.parse import urlparse, urljoin
 import openpyxl
 from openpyxl.styles import Font, Alignment
 from playwright.sync_api import sync_playwright
@@ -37,6 +39,7 @@ ONEDRIVE_DIR = r"C:\Users\thuyn\OneDrive - EUREKA TRADE AND IMPORT EXPORT COMPAN
 FILE_HOI_DAP = os.path.join(ONEDRIVE_DIR, "01_BAI_HOI_DAP_GROUP_FACEBOOK.xlsx")
 FILE_CHIA_SE = os.path.join(ONEDRIVE_DIR, "02_BAI_CHIA_SE_KIEN_THUC_GROUP_FACEBOOK.xlsx")
 LOCAL_DAILY_NOTES = os.path.join(BASE_DIR, "scratch", "daily_notes.md")
+LEDGER_FILE = os.path.join(BASE_DIR, "scratch", "scraped_posts_ledger.json")
 
 TARGET_GROUPS = [
     {"url": "https://www.facebook.com/groups/thutuchaiquanxuatnhapkhau/?sorting_setting=CHRONOLOGICAL", "name": "Xuất nhập khẩu Logistics"},
@@ -55,21 +58,139 @@ SPAM_EXCLUDES = [
     "bán tài khoản", "via fb", "bm fb", "chạy ads chiết khấu"
 ]
 
-def load_existing_urls():
-    existing = set()
+def extract_fb_post_id(url):
+    """
+    Trích xuất Post ID độc nhất từ mọi định dạng URL Facebook:
+    - /groups/.../posts/<id>
+    - /groups/.../permalink/<id>
+    - /share/p/<id>
+    - ?story_fbid=<id> hoặc &fbid=<id>
+    """
+    if not url:
+        return ''
+    url = str(url).strip()
+    m = re.search(r'/(?:posts|permalink)/([0-9a-zA-Z]+)', url)
+    if m:
+        return m.group(1)
+    m = re.search(r'/share/p/([0-9a-zA-Z]+)', url)
+    if m:
+        return m.group(1)
+    m = re.search(r'[?&](?:story_fbid|fbid)=([0-9a-zA-Z]+)', url)
+    if m:
+        return m.group(1)
+    path = urlparse(url).path.strip('/')
+    parts = [p for p in path.split('/') if p]
+    return parts[-1] if parts else url
+
+def normalize_fb_url(url):
+    """
+    Chuẩn hóa URL Facebook:
+    - Xử lý link tương đối (/groups/...) thành tuyệt đối (https://www.facebook.com/groups/...)
+    - Loại bỏ tracking parameters (?ref=..., ?__cft__=..., ?mibextid=...)
+    - Loại bỏ dấu gạch chéo cuối URL
+    """
+    if not url:
+        return ''
+    url = str(url).strip()
+    if url.startswith('/'):
+        url = urljoin('https://www.facebook.com', url)
+    parsed = urlparse(url)
+    clean = f'https://www.facebook.com{parsed.path}'.rstrip('/')
+    return clean
+
+def compute_content_hash(text):
+    """
+    Tính mã băm MD5 cho 250 ký tự đầu tiên của nội dung bài viết
+    (sau khi chuẩn hóa chữ thường và xóa ký tự trắng) để chống cào trùng cross-posting.
+    """
+    if not text:
+        return ''
+    cleaned = re.sub(r'\W+', '', text.lower())
+    sample = cleaned[:250]
+    return hashlib.md5(sample.encode('utf-8')).hexdigest()
+
+def load_dedup_knowledge():
+    """
+    Nạp dữ liệu lịch sử từ 3 nguồn độc lập:
+    1. Sổ cái cục bộ scratch/scraped_posts_ledger.json
+    2. File Excel 01_BAI_HOI_DAP_GROUP_FACEBOOK.xlsx trên OneDrive
+    3. File Excel 02_BAI_CHIA_SE_KIEN_THUC_GROUP_FACEBOOK.xlsx trên OneDrive
+    
+    Trả về bộ 3 sets:
+    - existing_ids: tập hợp các Post ID đã cào
+    - existing_urls: tập hợp các URL đã chuẩn hóa
+    - existing_hashes: tập hợp mã băm MD5 của nội dung đã cào
+    - ledger: dict sổ cái cục bộ
+    """
+    existing_ids = set()
+    existing_urls = set()
+    existing_hashes = set()
+    ledger = {}
+    
+    # 1. Nạp từ sổ cái cục bộ trước
+    if os.path.exists(LEDGER_FILE):
+        try:
+            with open(LEDGER_FILE, 'r', encoding='utf-8') as f:
+                ledger = json.load(f)
+            for pid, item in ledger.items():
+                existing_ids.add(str(pid))
+                if item.get("url"):
+                    existing_urls.add(item["url"].lower())
+                if item.get("content_hash"):
+                    existing_hashes.add(item["content_hash"])
+        except Exception as e:
+            print(f"[!] Cảnh báo nạp ledger: {e}")
+            ledger = {}
+            
+    # 2. Nạp đối chiếu từ 2 file Excel trên OneDrive
     for f in [FILE_HOI_DAP, FILE_CHIA_SE]:
         if os.path.exists(f):
             try:
                 wb = openpyxl.load_workbook(f, data_only=True)
                 s = wb.active
                 for r in range(6, s.max_row + 1):
-                    val = s.cell(r, 10).value
-                    if val:
-                        clean = str(val).strip().rstrip('/')
-                        existing.add(clean.lower())
+                    val_url = s.cell(r, 10).value
+                    val_content = s.cell(r, 9).value
+                    if val_url:
+                        pid = extract_fb_post_id(val_url)
+                        norm = normalize_fb_url(val_url)
+                        if pid:
+                            existing_ids.add(str(pid))
+                        if norm:
+                            existing_urls.add(norm.lower())
+                        raw_clean = str(val_url).strip().rstrip('/')
+                        existing_urls.add(raw_clean.lower())
+                    if val_content:
+                        chash = compute_content_hash(str(val_content))
+                        if chash:
+                            existing_hashes.add(chash)
             except Exception as e:
                 print(f"[!] Cảnh báo đọc file {f}: {e}")
-    return existing
+                
+    return existing_ids, existing_urls, existing_hashes, ledger
+
+def update_ledger(record, ledger, content_hash):
+    """Cập nhật bản ghi mới vào sổ cái JSON cục bộ an toàn (atomic save)"""
+    pid = record["post_id"]
+    ledger[pid] = {
+        "post_id": pid,
+        "url": record["url"],
+        "category": record["category"],
+        "group_name": record["group_name"],
+        "author": record["author"],
+        "title": record["title_summary"],
+        "content_hash": content_hash,
+        "scan_date": record["scan_date"].strftime("%Y-%m-%d %H:%M:%S") if isinstance(record["scan_date"], datetime.datetime) else str(record["scan_date"]),
+        "post_date": record["post_date"].strftime("%Y-%m-%d %H:%M:%S") if isinstance(record["post_date"], datetime.datetime) else str(record["post_date"]),
+        "media": record["media"]
+    }
+    try:
+        temp_ledger = LEDGER_FILE + ".tmp"
+        with open(temp_ledger, 'w', encoding='utf-8') as f:
+            json.dump(ledger, f, ensure_ascii=False, indent=2)
+        os.replace(temp_ledger, LEDGER_FILE)
+    except Exception as e:
+        print(f"  [!] Lỗi lưu sổ cái ledger: {e}")
 
 def is_within_24h(time_str):
     t = time_str.lower()
@@ -459,8 +580,8 @@ def main():
     print("KHỞI CHẠY QUY TRÌNH QUÉT & PHÂN LOẠI GROUP FACEBOOK 24H")
     print("="*70)
     
-    existing_urls = load_existing_urls()
-    print(f"[*] Đã tải {len(existing_urls)} URL bài viết đã có để chống trùng lặp.")
+    existing_ids, existing_urls, existing_hashes, ledger = load_dedup_knowledge()
+    print(f"[*] Đã nạp dữ liệu chống trùng lặp: {len(existing_ids)} Post IDs | {len(existing_urls)} URLs | {len(existing_hashes)} Content Hashes.")
     
     candidate_posts = []
     
@@ -492,20 +613,29 @@ def main():
                 else:
                     links = page.locator('div[role="main"] a[href*="/posts/"], div[role="main"] a[href*="/permalink/"]').all()
                     
-                seen = set()
+                seen_ids = set()
+                seen_urls = set()
                 for l in links:
                     href = l.get_attribute("href")
                     if not href or "/groups/" not in href:
                         continue
-                    clean_url = href.split("?")[0].rstrip('/')
-                    if clean_url in seen or clean_url.lower() in existing_urls:
+                    clean_url = normalize_fb_url(href)
+                    post_id = extract_fb_post_id(clean_url)
+                    
+                    if not post_id:
                         continue
-                    seen.add(clean_url)
+                    if post_id in seen_ids or clean_url.lower() in seen_urls:
+                        continue
+                    if post_id in existing_ids or clean_url.lower() in existing_urls:
+                        continue
+                        
+                    seen_ids.add(post_id)
+                    seen_urls.add(clean_url.lower())
                     
                     time_txt = l.inner_text().strip()
                     if is_within_24h(time_txt):
-                        print(f"  -> Phát hiện bài mới trong 24h: {clean_url} ({time_txt})")
-                        candidate_posts.append((clean_url, g_name, time_txt))
+                        print(f"  -> Phát hiện bài mới trong 24h: {clean_url} [ID: {post_id}] ({time_txt})")
+                        candidate_posts.append((clean_url, post_id, g_name, time_txt))
             except Exception as e:
                 print(f"  [!] Lỗi quét {g_name}: {e}")
                 
@@ -516,8 +646,9 @@ def main():
         added_cs = 0
         added_records = []
         
-        for post_url, group_name, time_txt in candidate_posts:
-            if post_url.lower() in existing_urls:
+        for post_url, post_id, group_name, time_txt in candidate_posts:
+            if post_id in existing_ids or post_url.lower() in existing_urls:
+                print(f"  -> Bỏ qua {post_url}: Post ID {post_id} đã có trong lịch sử.")
                 continue
                 
             print(f"\n--- Bóc tách chi tiết: {post_url} ---")
@@ -525,14 +656,21 @@ def main():
             if not detail:
                 continue
                 
+            # Kiểm tra trùng nội dung (Content Hash) - chống cross-posting giữa các group hoặc đăng lại
+            content_hash = compute_content_hash(detail["content"])
+            if content_hash and content_hash in existing_hashes:
+                print(f"  -> Bỏ qua: Trùng 100% nội dung với bài viết đã cào trước đó (Content Hash: {content_hash[:8]}).")
+                continue
+                
             is_valid, cat, title, topics, summary = analyze_content(detail["content"])
             if not is_valid:
                 print("  -> Bỏ qua: Không thỏa tiêu chí chuyên môn hoặc là tin rác/quảng cáo.")
                 continue
                 
-            note = "Đã loại quảng cáo, tuyển dụng, chào giá, xin hàng/dịch vụ và bài trùng URL. Giờ đăng trong vòng 24h ngày quét."
+            note = "Đã loại quảng cáo, tuyển dụng, chào giá, xin hàng/dịch vụ và bài trùng ID/URL/Nội dung. Giờ đăng trong vòng 24h ngày quét."
             
             rec = {
+                "post_id": post_id,
                 "scan_date": now,
                 "post_date": now.replace(hour=0, minute=0, second=0, microsecond=0),
                 "category": cat,
@@ -550,7 +688,7 @@ def main():
             }
             
             print(f"  [>] Phân loại: {cat} | Tác giả: {detail['author']} | Tiêu đề: {title}")
-            print(f"  [>] Media: {detail['media']} | Từ khóa: {topics}")
+            print(f"  [>] Media: {detail['media']} | Từ khóa: {topics} | ID: {post_id}")
             
             if cat == "Hỏi đáp":
                 append_to_excel(FILE_HOI_DAP, rec)
@@ -560,7 +698,11 @@ def main():
                 added_cs += 1
                 
             added_records.append(rec)
+            existing_ids.add(post_id)
             existing_urls.add(post_url.lower())
+            if content_hash:
+                existing_hashes.add(content_hash)
+            update_ledger(rec, ledger, content_hash)
             
         context.close()
         

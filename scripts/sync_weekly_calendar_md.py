@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import openpyxl
 
 excel_path = r"reports\plan1\Weekly_Content_Calendar.xlsx"
@@ -53,13 +53,13 @@ rows.sort(key=lambda x: x["stt"])
 md_lines = [
     "# 📅 LỊCH BIÊN TẬP TUẦN - KẾ HOẠCH BÀI ĐĂNG (WEEKLY EDITORIAL CALENDAR)",
     "**Kế hoạch:** `plan1` — Quản lý lịch đăng & Bài đăng hoàn chỉnh của hệ thống PBAN  ",
-    "**Kỳ đánh giá mới nhất:** Tuần W33 đến W41 (Từ 17/08/2026 đến 18/10/2026)  ",
-    "**Trạng thái phê duyệt:** 🟢 W33 - W40 ĐÃ DUYỆT & HOÀN TẤT LẬP LỊCH (56 BÀI) | 🟡 W41 ĐANG CHỜ DUYỆT Ý TƯỞNG (7 BÀI: STT 57-63)  ",
+    "**Kỳ đánh giá mới nhất:** Tuần W33 đến W43 (Từ 17/08/2026 đến 01/11/2026)  ",
+    "**Trạng thái phê duyệt:** 🟢 W33 - W42 ĐÃ DUYỆT HOÀN TẤT (70 BÀI) | 🟡 W43 ĐANG CHỜ DUYỆT Ý TƯỞNG CHECKPOINT 1 (7 BÀI: STT 71-77)  ",
     "**Lịch Excel gốc:** [Weekly_Content_Calendar.xlsx](file:///d:/AI%20AGENT%20THUY/AI%20branding/reports/plan1/Weekly_Content_Calendar.xlsx)",
     "",
     "---",
     "",
-    "## 1. Bảng phân phối Lịch đăng bài 3 Phương án (Options A, B, C) — Hệ thống PBAN 2.0 (W33 - W41)",
+    "## 1. Bảng phân phối Lịch đăng bài 3 Phương án (Options A, B, C) — Hệ thống PBAN 2.0 (W33 - W43)",
     "",
     "Dưới đây là bảng tổng hợp các phương án chủ đề hàng tuần đã được tối ưu hóa theo đúng 4 Trụ cột nội dung (TN, CS, HT, FF), tỷ lệ 60% Giáp Mộc & 40% Liêm Trinh, và cân đối nền tảng Facebook (4 bài/tuần) & YouTube (3 video/tuần):",
     "",
@@ -75,21 +75,21 @@ md_lines.extend([
     "",
     "---",
     "",
-    "## 2. Bản phân tích Tỷ lệ Góc tiếp cận & Nền tảng (Validation Tuần W41)",
+    "## 2. Bản phân tích Tỷ lệ Góc tiếp cận & Nền tảng (Validation Tuần W43)",
     "",
     "- **Tỷ lệ Năng lượng Nhân hiệu:**",
-    "  - **Giáp Mộc (~60%):** Nâng đỡ, khai phóng tri thức Siêu Cảng Singapore & Tuas 20 tỷ USD vận hành 100% bằng robot (FF Thứ Ba), cầm tay chỉ việc khai e-Manifest và đồng bộ mã vạch dữ liệu số theo Thông tư 128 qua Cửa khẩu thông minh (HT Thứ Năm - Học XNK 5 phút Tập 11), bóc tách nghịch lý cỗ máy tuần hoàn container rỗng toàn cầu (FF Thứ Bảy), cẩm nang quản trị công nợ B2B và nghệ thuật đàm phán bảo lãnh ngân hàng (CS Chủ Nhật).",
-    "  - **Liêm Trinh (~40%):** Sắc bén cảnh báo 72h đếm ngược bộ ba chuyển đổi số (TT 128, NĐ 336, QĐ 1434) có nguy cơ bị khóa barie cửa khẩu thông minh (TN Thứ Hai), vạch trần bẫy mã HS linh kiện máy nén khí (lò xo khí, bộ báo nghẹt lọc gió) truy thu thuế 5 năm (CS Thứ Tư), cảnh báo bão rà soát thuế COD qua eTax Mobile và đề xuất hạ ngưỡng miễn thuế 100.000đ (TN Thứ Sáu).",
+    "  - **Giáp Mộc (~60%):** Khai phóng tri thức Kỳ Án Khủng Hoảng Hạn Hán Kênh Đào Panama & bài học phân bổ tuyến hàng hải (FF Thứ Ba), Góc nhìn thấu hiểu & gỡ rối ranh giới DNCX vs Doanh nghiệp FDI thông thường trong KCX (CS Thứ Tư), Cầm tay chỉ việc 5 bước nộp hồ sơ Advance Ruling khóa rủi ro thuế quan (HT Thứ Năm - Học XNK 5 phút Tập 13), Bức tranh tương lai cỗ máy logistics cảng tự động hóa Rotterdam Maasvlakte 2 vận hành bằng 100% điện gió (FF Thứ Bảy).",
+    "  - **Liêm Trinh (~40%):** Sắc bén cảnh báo rủi ro tắc C/O khi phân cấp về địa phương theo Thông tư 26/2026/TT-BCT & Nghị định 146/2025/NĐ-CP (TN Thứ Hai), Vạch trần cạm bẫy áp mã HS Smartwatch nhìn tên đồng hồ vội áp nhóm 91.02 theo Thông báo 22555/TB-CHQ (TN Thứ Sáu), Nghiêm cẩn pháp lý về điều kiện chỉ định thương nhân nước ngoài trong XNK tại chỗ theo Công văn 22411/CHQ-GSQL & Điều 47a Luật Hải quan (CS Chủ Nhật).",
     "- **Tỷ lệ Phân bổ Nền tảng (Chuẩn PBAN 2.0):**",
-    "  - **Facebook (4 bài/tuần):** Thứ Hai (TN), Thứ Tư (CS), Thứ Sáu (TN), Chủ Nhật (CS) — Đặt vấn đề sắc bén (Problem-First), bóc tách tình huống thực tế và kích thích tranh luận văn minh.",
-    "  - **YouTube (3 video/tuần):** Thứ Ba (FF Video Phân tích & Insight 8-12p), Thứ Năm (HT Video Học XNK 5 phút Tập 11), Thứ Bảy (FF Video Phân tích chuyên sâu 8-12p) — Giáo dục chuyên sâu, trao giá trị thực chiến và xây dựng uy tín tri thức dài hạn.",
+    "  - **Facebook (4 bài/tuần):** Thứ Hai (TN), Thứ Tư (CS), Thứ Sáu (TN), Chủ Nhật (CS) — Đặt vấn đề sắc bén (Problem-First), bóc tách tình huống thực tế và kích thích thảo luận văn minh.",
+    "  - **YouTube (3 video/tuần):** Thứ Ba (FF Video Phân tích & Insight 8-12p), Thứ Năm (HT Video Học XNK 5 phút Tập 13), Thứ Bảy (FF Video Phân tích chuyên sâu 8-12p) — Giáo dục chuyên sâu, trao giá trị thực chiến và xây dựng uy tín tri thức dài hạn.",
     "- **Tuân thủ Bộ từ cấm (Banned Words Compliance):** 100% các tiêu đề và nội dung được quét tự động, tuyệt đối không chứa các từ cấm hay ngữ cảnh nhạy cảm.",
     "",
     "---",
     "",
     "## 3. Quy trình Phê duyệt Checkpoint 1 & Đóng gói PO (wf01)",
     "",
-    "1. **Bước 1 (Checkpoint 1):** Chị Thúy xem xét các phương án Option A/B/C trên bảng kế hoạch tuần W41.",
+    "1. **Bước 1 (Checkpoint 1):** Chị Thúy xem xét các phương án Option A/B/C trên bảng kế hoạch tuần W43.",
     "2. **Bước 2:** Chọn phương án duyệt tại Cột K của file Excel [Weekly_Content_Calendar.xlsx](file:///d:/AI%20AGENT%20THUY/AI%20branding/reports/plan1/Weekly_Content_Calendar.xlsx) (chọn `Duyệt Option A`, `Duyệt Option B`, hoặc `Duyệt Option C`).",
     "3. **Bước 3:** Hệ thống tự động kích hoạt **Agent 04 (Planner)** đóng gói 7 Phiếu Giao việc (PO) vật lý tại thư mục `scratch/production_orders/` để sẵn sàng bàn giao cho Agent 05 (Facebook) và Agent 06 (YouTube) theo quy trình `wf02` và `wf03`."
 ])

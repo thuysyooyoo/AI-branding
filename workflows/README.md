@@ -18,6 +18,7 @@ Khi tiếp nhận yêu cầu từ chị Thúy, **Agent 00 (Chief Orchestrator)**
 | **`wf06`** | **Cập nhật kho ý tưởng 4 Pillars**| *"Cập nhật kho ý tưởng", "Quét ý tưởng Pillar Tin Ngành"* | `01` | Cập nhật 4 file Excel Ideas Banks |
 | **`wf07`** | **Rà soát & Thẩm định nội dung** | *"Rà soát bài viết này", "Kiểm tra tính chính xác của bản thảo"*| `08`, `02` | Báo cáo Fact-Check `🟢 PASSED` / Cần sửa |
 | **`wf08`** | **Đo lường & Cập nhật từ cấm** | *"Đánh giá hiệu suất tuần qua", "Cập nhật từ cấm động"* | `07`, `02` | Báo cáo tối ưu + Cập nhật từ cấm |
+| **`wf09`** | **Sản xuất video ngắn Viral Reels** | *"/viral-reels", "/fb-video", "viết kịch bản hài văn phòng"* | `09`, `02`, `08` | File kịch bản + Cập nhật Excel OneDrive |
 
 ---
 
@@ -38,3 +39,4 @@ Tất cả các workflow sản xuất đều tuân thủ nghiêm ngặt 2 trạm
 - [`wf06_ideas_bank_update.md`](file:///d:/AI%20AGENT%20THUY/AI%20branding/workflows/wf06_ideas_bank_update.md) — Quy trình Cập nhật kho ý tưởng 4 Trụ cột
 - [`wf07_content_audit_verification.md`](file:///d:/AI%20AGENT%20THUY/AI%20branding/workflows/wf07_content_audit_verification.md) — Quy trình Rà soát & Thẩm định tính chính xác/hợp lệ
 - [`wf08_performance_feedback.md`](file:///d:/AI%20AGENT%20THUY/AI%20branding/workflows/wf08_performance_feedback.md) — Quy trình Đánh giá hiệu suất & Vòng lặp phản hồi
+- [`wf09_viral_reels_production.md`](file:///d:/AI%20AGENT%20THUY/AI%20branding/workflows/wf09_viral_reels_production.md) — Quy trình Sản xuất video ngắn Viral Reels hài văn phòng cho Eureka

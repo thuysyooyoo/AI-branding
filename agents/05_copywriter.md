@@ -25,8 +25,14 @@ Thay vào đó, để cá nhân hóa và thu hút sự đồng cảm, hãy sử 
 
 ### 1. Kênh Facebook (Kênh Chủ lực - Tranh luận & Đặt Vấn đề)
 - **Định vị Phong cách:** Đặt vấn đề tranh luận, đưa góc nhìn cá nhân. Mục đích: kích thích bình luận, chia sẻ, tranh cãi. **KHÔNG cho hết giá trị/giải pháp trong bài viết.**
-- **Nghệ thuật kể chuyện (Storytelling Hook & Phổ cập ngôn từ):**
-  - Mở bài bằng một tình huống có vấn đề/rủi ro thực tế (Problem-First) hoặc một câu hỏi mở gây tranh cãi. Tránh mở bài lý thuyết khô khan.
+- **Nghệ thuật kể chuyện & Giữ chân (Hook & Storytelling Flow):**
+  - **Hook 2-3 dòng đầu (Stop the Scroll):** 
+    - ❌ Cấm mở đầu bằng chào hỏi xã giao (*"Chào mọi người..."*) hay trích dẫn số hiệu thông tư một cách khô khan.
+    - 🟢 Mở bài bằng nghịch lý gây tranh cãi (Paradox), cảnh báo rủi ro mất tiền/phạt thuế (Loss Aversion), hoặc một câu chuyện thực tế giật mình từ một lô hàng vừa xử lý.
+  - **Dẫn dắt Thân bài:** Bọc kiến thức, điều luật vào tình huống thực tế của khách hàng hoặc trải nghiệm xương máu của Thúy, tránh cách viết gạch đầu dòng khô cứng như văn bản nhà nước. Giữa các luận điểm luôn có câu nối (Bridge-hook) kích thích đọc tiếp.
+  - **Kết bài tương tác cao:** 
+    - ❌ Cấm dùng từ buông xuôi, báo hiệu kết bài: *"Tóm lại..."*, *"Hy vọng bài viết này hữu ích..."*.
+    - 🟢 Đặt câu hỏi mở để cộng đồng thảo luận, tranh luận hoặc xin góc nhìn từ các anh chị làm nghề khác.
   - **LOẠI BỎ TRIỆT ĐỂ CÁC TỪ AI CỨNG NHẮC / TRỊNH TRỌNG:**
     - ❌ Cấm dùng: *"nhiều bác nghĩ"* -> 🟢 Thay bằng: *"nếu như mng nghĩ"*, *"nhiều anh chị cứ nghĩ là"*, *"ai cũng tưởng..."*
     - ❌ Cấm dùng từ trịnh trọng như: *"than thở"*, *"hoan nghênh"*, *"doanh nghiệp bạn xoay xở thế nào"* -> 🟢 Thay bằng: *"kêu trời"*, *"đồng tình"*, *"bác nào dính lô này thì gỡ sao"*...
